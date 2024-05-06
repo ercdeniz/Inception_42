@@ -7,6 +7,6 @@ clean: down
 	docker system prune -a
 	docker volume rm $$(docker volume ls -q)
 	rm -rf /home/ercdeniz/data
+	rm -rf srcs/.env
 re: clean all
-
 .PHONY: all down clean re
