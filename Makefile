@@ -1,19 +1,12 @@
 all:
-	@mkdir -p /home/ercdeniz/data/wordpress
-	@mkdir -p /home/ercdeniz/data/mariadb
-	@docker-compose -f srcs/docker-compose.yml up --build
+	mkdir -p /home/ercdeniz/data /home/ercdeniz/data/mysql /home/ercdeniz/data/wordpress
+	docker-compose -f ./srcs/docker-compose.yml up --build -d
+down:
+	docker-compose -f ./srcs/docker-compose.yml down
+clean: down
+	docker system prune -a
+	docker volume rm $$(docker volume ls -q)
+	rm -rf /home/ercdeniz/data
+re: clean all
 
-start:
-	@docker-compose -f srcs/docker-compose.yml start
-
-stop:
-	@docker-compose -f srcs/docker-compose.yml stop
-
-clean:
-	@docker-compose -f srcs/docker-compose.yml down --volumes
-
-fclean: clean
-	@docker system prune -af
-	@rm -rf /home/ercdeniz/data
-
-.PHONY: all start stop clean fclean re
+.PHONY: all down clean re
