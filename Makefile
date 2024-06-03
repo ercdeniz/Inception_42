@@ -16,4 +16,4 @@ fclean: clean
 	@docker system prune -af
 	@rm -rf /home/ercdeniz/data
 
-.PHONY: all start stop clean fclean re
+.PHONY: all start stop clean fclean
